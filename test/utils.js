@@ -9,19 +9,20 @@ const fisrelease = require('fis3-command-release');
 var parserVuePlugin = require('../src/index');
 
 const commonMatcher = {
-  '/fixtures/**.vue': {
+  '**.vue': {
     isMod: true,
-    wrap: true, 
+    wrap: true,
     rExt: 'js',
     useSameNameRequire: true,
     parser: [
       function(content, file, conf) {
         conf.runtimeOnly = true;
+        conf.extractCSS = false;
         return parserVuePlugin(content, file, conf);
       }
     ]
   },
-  '/fixtures/**.vue:js': {
+  '**.vue:js': {
     isMod: true,
     wrap: true, 
     rExt: 'js',
@@ -32,7 +33,7 @@ const commonMatcher = {
       sourceMap: false
     })
   },
-  '/fixtures/**.{js,ts,es}': {
+  '**.{js,ts,es}': {
     isMod: true,
     wrap: true,
     parser: fis.plugin('typescript', {
@@ -42,7 +43,15 @@ const commonMatcher = {
     }),
     rExt: 'js'
   },
-  '/fixtures/{**.vue:scss,**.scss}': {
+  '**.{js,vue}': {
+    packTo: 'bundle.js'
+  },
+  'mod.js': {
+    packOrder: -100,
+    parser: null,
+    isMod: false
+  },
+  '{**.vue:scss,**.scss}': {
     rExt: 'css',
     parser: [
       fis.plugin('node-sass', {
@@ -62,7 +71,7 @@ function bundle(options, cb, wontThrowError) {
   const root = path.join(__dirname, 'fixtures');
   fis.project.setProjectRoot(root);
   // 需要构建的文件后缀
-  fis.set('project.fileType.text', 'vue,map,js');
+  fis.set('project.fileType.text', 'vue,map');
 
   // 模块化支持插件
   fis.hook('commonjs', {
@@ -105,13 +114,15 @@ function bundle(options, cb, wontThrowError) {
     });
   });
 
-  // fis.on('deploy:end', function() {
-  //   const file = require.resolve('../output/basic.js')
-  //   cb(fis.util.read(file))
-  // });
-
   const output = path.join(__dirname, 'fixtures/output')
-  fisrelease.run({'dest': output, '_':[]}, fis.cli, {})
+
+  fis.on('deploy:end', function() {
+    const bundle = path.resolve(output, 'bundle.js')
+    let code = fis.util.read(bundle) + "require('entry.js')"
+    cb(code)
+  });
+
+  fisrelease.run({'dest': output, 'clean': true, '_':[]}, fis.cli, {})
 
   // const webpackCompiler = webpack(config)ll
   // webpackCompiler.outputFileSystem = mfs
@@ -137,6 +148,7 @@ function mockBundleAndRun(options, assert, wontThrowError) {
     let dom, jsdomError
     try {
       dom = new JSDOM(`<!DOCTYPE html><html><head></head><body></body></html>`, {
+        resources: "usable",
         runScripts: 'outside-only'
       })
       dom.window.eval(code)

@@ -11,4 +11,4 @@ function insertCSS(styleContent) {
   document.getElementsByTagName("head")[0].appendChild(styleNode);
 };
 
-module.exports = uglifyJS.minify(insertCSS.toString(), {fromString: true}).code;
+module.exports = uglifyJS.minify(insertCSS.toString(), {}).code;
