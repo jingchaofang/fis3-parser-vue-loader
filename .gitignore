@@ -1,0 +1,16 @@
+*.log
+*.pid
+*.seed
+.DS_Store
+.grunt
+.npm
+.tag*
+
+output
+coverage
+
+npm-debug.log*
+package-lock.json
+
+node_modules
+**/node_modules
