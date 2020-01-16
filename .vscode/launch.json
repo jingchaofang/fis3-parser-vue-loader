@@ -4,6 +4,20 @@
       {
         "type": "node",
         "request": "launch",
+        "name": "npm run release",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run-script",
+          "release:debug"
+        ],
+        "port": 9229,
+        "skipFiles": [
+          "<node_internals>/**"
+        ]
+      },
+      {
+        "type": "node",
+        "request": "launch",
         "name": "Jest All",
         "program": "${workspaceFolder}/node_modules/.bin/jest",
         "args": ["--runInBand"],
