@@ -10,7 +10,7 @@ const execa = require('execa')
 
 const preId = args.preid || semver.prerelease(currentVersion) ? semver.prerelease(currentVersion)[0] : 'latest' || 'latest'
 // 只更新版本和生成CHANGELOG.md
-// npm run release --dry
+// npm run release --dry=true
 const isDryRun = args.dry
 // 是否跳过测试
 const skipTests = args.skipTests
@@ -111,17 +111,6 @@ async function main() {
   if (isDryRun) {
     console.log(`\nDry run finished - run git diff to see package changes.`)
   }
-
-  if (skippedPackages.length) {
-    console.log(
-      chalk.yellow(
-        `The following packages are skipped and NOT published:\n- ${skippedPackages.join(
-          '\n- '
-        )}`
-      )
-    )
-  }
-  console.log()
 }
 
 function updateVersions(version) {
