@@ -1,4 +1,4 @@
-# fis3-parser-vue-loader
+# fis3-parser-vue-loader-latest
 
 A parser plugin for fis3 like vue-loader
 
@@ -9,7 +9,7 @@ The project is developed on the basis of [fis3-parser-vue-component](https://git
 ## usage
 
 ```
-npm install fis3-parser-vue-loader
+npm install fis3-parser-vue-loader-latest
 ```
 
 
