@@ -1,2 +1,7 @@
 DEV.md
 *.log
+.DS_Store
+scripts
+example
+.vscode
+.circleci
