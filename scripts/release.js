@@ -10,7 +10,7 @@ const execa = require('execa')
 
 const preId = args.preid || semver.prerelease(currentVersion) ? semver.prerelease(currentVersion)[0] : 'latest' || 'latest'
 // 只更新版本和生成CHANGELOG.md
-// npm run release -dry
+// npm run release --dry
 const isDryRun = args.dry
 // 是否跳过测试
 const skipTests = args.skipTests
@@ -150,7 +150,7 @@ async function publishPackage(version, runIfNotDry) {
   // `latest`, whereas "vue" will be published under the "next" tag.
 
   // https://docs.npmjs.com/adding-dist-tags-to-packages
-  const releaseTag = semver.prerelease(version)[0] || 'latest'
+  const releaseTag = semver.prerelease(currentVersion) ? semver.prerelease(currentVersion)[0] : 'latest' || 'latest'
   
   step(`Publishing ${pkgName}...`)
   try {
