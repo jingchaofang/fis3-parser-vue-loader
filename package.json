@@ -1,6 +1,6 @@
 {
-  "name": "fis3-parser-vue-loader",
-  "version": "1.0.1",
+  "name": "fis3-parser-vue-loader-latest",
+  "version": "1.0.2",
   "description": "A parser plugin for fis3 like vue-loader",
   "main": "src/index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "fis3",
     "fis3-parser",
     "fis3-parser-vue-loader",
+    "fis3-parser-vue-loader-latest",
     "fis3-parser-vue-component",
     "fis3-parser-vue"
   ],
