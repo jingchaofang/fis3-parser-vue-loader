@@ -10,7 +10,6 @@ const execa = require('execa')
 
 const preId = args.preid || semver.prerelease(currentVersion) ? semver.prerelease(currentVersion)[0] : 'latest' || 'latest'
 // 只更新版本和生成CHANGELOG.md
-// npm run release --dry=true
 const isDryRun = args.dry
 // 是否跳过测试
 const skipTests = args.skipTests
