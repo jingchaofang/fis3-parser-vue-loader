@@ -80,10 +80,6 @@ async function main() {
     console.log(`(skipped)`)
   }
 
-  // update package version
-  step('\nUpdating package version...')
-  updateVersions(targetVersion)
-
   // generate changelog
   await run(`npm`, ['run', 'changelog'])
 
@@ -110,18 +106,6 @@ async function main() {
   if (isDryRun) {
     console.log(`\nDry run finished - run git diff to see package changes.`)
   }
-}
-
-function updateVersions(version) {
-  // update root package.json
-  updatePackage(path.resolve(__dirname, '..'), version)
-}
-
-function updatePackage(pkgRoot, version) {
-  const pkgPath = path.resolve(pkgRoot, 'package.json')
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
-  pkg.version = version
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
 }
 
 async function publishPackage(version, runIfNotDry) {
