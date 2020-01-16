@@ -145,9 +145,18 @@ async function publishPackage(version, runIfNotDry) {
     await runIfNotDry(
       'npm',
       [
+        'version',
+        version
+      ],
+      {
+        cwd: pkgRoot,
+        stdio: 'pipe'
+      }
+    )
+    await runIfNotDry(
+      'npm',
+      [
         'publish',
-        '--new-version',
-        version,
         '--tag',
         releaseTag,
         '--access',

@@ -2,3 +2,7 @@
 
 
 
+# [1.0.0](https://github.com/jingchaofang/fis3-parser-vue-loader/compare/v1.0.3...v1.0.0) (2020-01-16)
+
+
+
