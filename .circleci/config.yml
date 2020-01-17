@@ -34,5 +34,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run: ./node_modules/.bin/jest --clearCache
       - run: npm test
       - run: ./node_modules/.bin/codecov --token=622b9a46-cc67-4304-b90d-50970d88ccc3
