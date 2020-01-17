@@ -123,22 +123,6 @@ function bundle(options, cb, wontThrowError) {
   });
 
   fisrelease.run({'dest': output, 'clean': true, '_':[]}, fis.cli, {})
-
-  // const webpackCompiler = webpack(config)ll
-  // webpackCompiler.outputFileSystem = mfs
-  // webpackCompiler.run((err, stats) => {
-  //   const errors = stats.compilation.errors
-  //   if (!wontThrowError) {
-  //     expect(err).toBeNull()
-  //     if (errors && errors.length) {
-  //       errors.forEach(error => {
-  //         console.error(error.message)
-  //       })
-  //     }
-  //     expect(errors).toHaveLength(0)
-  //   }
-  //   cb(mfs.readFileSync('/test.build.js').toString(), stats, err)
-  // })
 }
 
 function mockBundleAndRun(options, assert, wontThrowError) {
@@ -148,7 +132,6 @@ function mockBundleAndRun(options, assert, wontThrowError) {
     let dom, jsdomError
     try {
       dom = new JSDOM(`<!DOCTYPE html><html><head></head><body></body></html>`, {
-        resources: "usable",
         runScripts: 'outside-only'
       })
       dom.window.eval(code)
