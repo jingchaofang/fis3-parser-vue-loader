@@ -2,12 +2,12 @@ test
 scripts
 example
 node_modules
+**/node_modules
 coverage
 .vscode
 .circleci
 *.log
 .DS_Store
-jest.config.jest
-CHANGELOG.md
-DEV.md
+jest.config.js
+*.md
 
