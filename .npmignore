@@ -9,3 +9,4 @@ jest.config.jest
 test
 CHANGELOG.md
 node_modules
+coverage
