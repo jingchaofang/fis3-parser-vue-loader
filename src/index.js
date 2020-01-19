@@ -17,6 +17,8 @@ const replaceScopedFlag = require('./lib/replace-scoped-flag')
  * @return {string]}         处理后的文件内容
  */
 module.exports = function(content, file, conf) {
+  // 兼容content为buffer的情况
+    content = content.toString();
 
   // 不处理空文件
   if (!content || !content.trim()) {
@@ -35,9 +37,6 @@ module.exports = function(content, file, conf) {
     styleNameJoin: '',
     runtimeOnly: false
   }, conf);
-
-  // 兼容content为buffer的情况
-  content = content.toString();
 
   // generate css scope id
   const id = configs.cssScopedIdPrefix + genId(file, configs);
@@ -86,7 +85,7 @@ module.exports = function(content, file, conf) {
       ext: output.template.lang || 'html',
       isHtmlLike: true
     });
-    // runtimeOnly 运行模式
+    // runtimeOnly
     if (configs.runtimeOnly) {
       var result = compileTemplate(templateContent);
       if(result){

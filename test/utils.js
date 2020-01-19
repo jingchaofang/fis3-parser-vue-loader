@@ -47,7 +47,7 @@ const commonMatcher = {
     packTo: 'bundle.js'
   },
   'mod.js': {
-    packOrder: -100,
+    packOrder: -100, // https://github.com/fex-team/fis3/blob/2c006abed3670f50c48e09bb4f52062e4ebd3725/doc/docs/pack.md
     parser: null,
     isMod: false
   },
