@@ -4,7 +4,7 @@
   "description": "A parser plugin for fis3 like vue-loader",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "release": "node scripts/release.js",
     "release:debug": "node --inspect-brk=9229 scripts/release.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"

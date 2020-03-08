@@ -6,8 +6,6 @@ const rewriteStyle = require('./lib/style-rewriter')
 // 编译模板
 const compileTemplate = require('./lib/template-compiler')
 const insertCSS = require('./lib/insert-css')
-// 替换旧的scoped标识为唯一hashid标志
-const replaceScopedFlag = require('./lib/replace-scoped-flag')
 
 /**
  * FIS3 Compile 编译阶段插件接口
@@ -29,9 +27,8 @@ module.exports = function(content, file, conf) {
   var output, configs, jsLang;
 
   configs = Object.assign({
-    cssScopedFlag: '__vuec__',
     extractCSS: true,
-    cssScopedIdPrefix: '_v-',
+    cssScopedIdPrefix: 'data-v-',
     cssScopedHashType: 'sum',
     cssScopedHashLength: 8,
     styleNameJoin: '',
@@ -40,11 +37,6 @@ module.exports = function(content, file, conf) {
 
   // generate css scope id
   const id = configs.cssScopedIdPrefix + genId(file, configs);
-
-  // 兼容旧的cssScopedFlag
-  if (configs.cssScopedFlag) {
-    content = replaceScopedFlag(content, configs.cssScopedFlag, id);
-  }
 
   // 解析组件
   var output = compiler.parseComponent(content.toString(), { pad: true });
@@ -120,7 +112,9 @@ module.exports = function(content, file, conf) {
       isCssLike: true
     });
 
-    styleContent = rewriteStyle(id, styleContent, item.scoped, {})
+    if (item.scoped) {
+      styleContent = rewriteStyle(id, styleContent, item.scoped, {});
+    }
 
     if (!configs.extractCSS) {
       scriptStr += '\n;(' + insertCSS + ')(' + JSON.stringify(styleContent) + ');\n';

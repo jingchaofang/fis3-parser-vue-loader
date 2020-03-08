@@ -51,3 +51,9 @@ https://github.com/facebook/jest
 https://jestjs.io/docs/en/getting-started
 
 [vscode调试jest](https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests)
+
+### jest默认并行，开启串行避免fis3编译污染
+
+--runInBand 或者简写为 -i 这个参数控制jest串行执行所有测试
+
+https://jestjs.io/docs/en/troubleshooting#tests-are-extremely-slow-on-docker-andor-continuous-integration-ci-server

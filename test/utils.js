@@ -24,7 +24,7 @@ const commonMatcher = {
   },
   '**.vue:js': {
     isMod: true,
-    wrap: true, 
+    wrap: true,
     rExt: 'js',
     useSameNameRequire: true,
     parser: fis.plugin('typescript', {
@@ -54,15 +54,15 @@ const commonMatcher = {
   '{**.vue:scss,**.scss}': {
     rExt: 'css',
     parser: [
-      fis.plugin('node-sass', {
-      })
+      fis.plugin('node-sass', {})
     ],
     postprocessor: fis.plugin('autoprefixer-latest'),
   },
 }
 
 function genId(file) {
-  return hash(path.join('test', 'fixtures', file).replace(/\\/g, '/'))
+  // return hash(path.join('test', 'fixtures', file).replace(/\\/g, '/'))
+  return hash(file)
 }
 
 // fis3 run
@@ -91,18 +91,26 @@ function bundle(options, cb, wontThrowError) {
     'README.md'
   ]));
 
-  // entry.js修改
+  // entry.js同步修改
   if (/\.vue/.test(options.target)) {
     // 例如basic.vue
-    const vueFile = options.target
+    const vueFile = options.target;
     // 修改entry.js的引入
-    const entry = require.resolve('./fixtures/entry')
-    let entryContent = fis.util.read(entry);
-    entryContent = entryContent.replace(/~target/g, vueFile)
-    fis.util.write(entry, entryContent, 'utf-8')
-    delete options.target
+    const entry = require.resolve('./fixtures/entry');
+    let entryRawContent = fis.util.read(entry);
+    entryContent = entryRawContent.replace(/~target/g, vueFile);
+    fis.util.write(entry, entryContent, 'utf-8');
+    delete options.target;
+
+    fis.on('deploy:end', function() {
+      fis.util.write(entry, entryRawContent, 'utf-8');
+    });
   }
 
+  const output = path.join(__dirname, 'fixtures/output');
+  delete options.output
+
+  // 合并编译配置
   let config = Object.assign({}, commonMatcher, options)
 
   let configArr = []
@@ -114,17 +122,16 @@ function bundle(options, cb, wontThrowError) {
     });
   });
 
-  const output = path.join(__dirname, 'fixtures/output')
-
   fis.on('deploy:end', function() {
     const bundle = path.resolve(output, 'bundle.js')
     let code = fis.util.read(bundle) + "require('entry.js')"
     cb(code)
   });
 
-  fisrelease.run({'dest': output, 'clean': true, '_':[]}, fis.cli, {})
+  fisrelease.run({ 'dest': output, 'clean': true, '_': [] }, fis.cli, {})
 }
 
+// 模拟打包运行代码
 function mockBundleAndRun(options, assert, wontThrowError) {
   const { suppressJSDOMConsole } = options
   delete options.suppressJSDOMConsole

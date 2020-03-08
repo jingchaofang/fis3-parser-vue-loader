@@ -1,11 +1,11 @@
+// https://github.com/sindresorhus/normalize-newline
+// Normalize the newline characters in a string to `\n`
+const normalizeNewline = require('normalize-newline')
+
 const {
   mockRender,
   mockBundleAndRun
 } = require('./utils')
-
-// https://github.com/sindresorhus/normalize-newline
-// Normalize the newline characters in a string to `\n`
-const normalizeNewline = require('normalize-newline')
 
 test('basic', done => {
   mockBundleAndRun({

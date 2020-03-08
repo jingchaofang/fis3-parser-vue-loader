@@ -15,7 +15,7 @@ module.exports = function genId(file, configs){
   let scopeId;
 
   // scope replace
-  if (configs.cssScopedType == 'sum') {
+  if (configs.cssScopedHashType == 'sum') {
     scopeId = hash(file.subpath);
   } else {
     scopeId = fis.util.md5(file.subpath, configs.cssScopedHashLength);

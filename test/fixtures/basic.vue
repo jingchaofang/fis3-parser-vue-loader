@@ -15,7 +15,6 @@ export default {
 <style>
 </style>
 
-
 <style>
 comp-a h2 {
   color: #f00;

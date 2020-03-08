@@ -15,5 +15,28 @@ The project is developed on the basis of [fis3-parser-vue-component](https://git
 npm install fis3-parser-vue-loader-latest
 ```
 
+## test
+
+```
+npm run test
+```
+
+### vscode
+
+```
+{
+    "type": "node",
+    "request": "launch",
+    "name": "Jest All",
+    "program": "${workspaceFolder}/node_modules/.bin/jest",
+    "args": ["--runInBand"],
+    "console": "integratedTerminal",
+    "internalConsoleOptions": "neverOpen",
+    "disableOptimisticBPs": true,
+    "windows": {
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+    }
+}
+```
 
 

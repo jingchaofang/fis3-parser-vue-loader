@@ -39,7 +39,6 @@ fis.match('mod.js', {
     isMod: false
 });
 
-
 // 编译vue组件
 fis.match('**.vue', {
     isMod: true,

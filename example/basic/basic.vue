@@ -15,8 +15,7 @@ export default {
 <style>
 </style>
 
-
-<style>
+<style scoped>
 comp-a h2 {
   color: #f00;
 }
