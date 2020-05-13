@@ -23,12 +23,24 @@ https://github.com/fex-team/fis3-hook-node_modules
 
 https://github.com/fex-team/fis3-postpackager-loader
 
-### fis3 release
+### fis3 release 命令参考
 
 https://github.com/fex-team/fis3-command-release
 
 https://github.com/fex-team/fis3-deploy-local-deliver
 
+
+## 在js中共享css变量（TODO）
+
+参考
+https://github.com/fex-team/fis3-preprocessor-js-require-css
+https://github.com/ystarlongzi/fis3-hook-css-modules/blob/master/src/index.js
+
+https://www.cnblogs.com/fayin/p/10510760.html
+
+https://github.com/css-modules/icss-utils/blob/master/src/createICSSRules.js
+
+https://github.com/webpack-contrib/css-loader/blob/master/src/plugins/postcss-icss-parser.js
 
 ## 模板编译
 
@@ -44,7 +56,7 @@ vue-loader/node_modules/@vue/component-compiler-utils/lib/compileTemplate.ts
 
 https://github.com/vuejs/vue-template-es2015-compiler
 
-## jest
+## jest测试用例
 
 https://github.com/facebook/jest
 

@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/jingchaofang/fis3-parser-vue-loader#readme",
   "dependencies": {
-    "chalk": "^3.0.0",
     "deasync": "^0.1.19",
     "hash-sum": "^2.0.0",
     "lru-cache": "^5.1.1",
@@ -39,6 +38,7 @@
     "vue-template-es2015-compiler": "^1.9.1"
   },
   "devDependencies": {
+    "chalk": "^3.0.0",
     "codecov": "^3.6.1",
     "conventional-changelog-cli": "^2.0.31",
     "enquirer": "^2.3.4",

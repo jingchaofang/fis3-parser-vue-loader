@@ -15,13 +15,36 @@ The project is developed on the basis of [fis3-parser-vue-component](https://git
 npm install fis3-parser-vue-loader-latest
 ```
 
-## test
+* fis-conf.js
+
+```
+// vue编译
+fis.match('client/widget/**.vue', {
+    isMod: true,
+    rExt: 'js',
+    useSameNameRequire: true,
+    parser: [
+        fis.plugin('vue-loader-latest', {
+            // 默认false
+            runtimeOnly: true,
+            // 默认为true, 如果为false则会内联到js中
+            extractCSS: true
+        })
+    ]
+});
+```
+
+## 功能支持
+
+* 在js中使用sass的全局变量
+
+## 测试
 
 ```
 npm run test
 ```
 
-### vscode
+* vscode调试jest
 
 ```
 {
